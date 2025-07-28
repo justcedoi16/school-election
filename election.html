@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Election Voting Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input[type="text"], button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 10px;
+      margin-top: 15px;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>SSG Election Voting Form</h2>
+    <form id="voteForm">
+      <label for="name">Student Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="grade">Grade & Section</label>
+      <input type="text" id="grade" name="grade" required>
+
+      <label for="president">President</label>
+      <select id="president" name="president" required>
+        <option value="">Select Candidate</option>
+        <option value="Alice Santos">Alice Santos</option>
+        <option value="Brian Reyes">Brian Reyes</option>
+      </select>
+
+      <label for="vp">Vice President</label>
+      <select id="vp" name="vp" required>
+        <option value="">Select Candidate</option>
+        <option value="Carla Dela Cruz">Carla Dela Cruz</option>
+        <option value="David Lim">David Lim</option>
+      </select>
+
+      <button type="submit">Submit Vote</button>
+    </form>
+    <div class="success" id="successMessage">Thank you! Your vote has been submitted.</div>
+  </div>
+
+  <script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+  
+      const data = {
+        name: document.getElementById("name").value,
+        grade: document.getElementById("grade").value,
+        president: document.getElementById("president").value,
+        vp: document.getElementById("vp").value
+      };
+  
+      fetch("https://script.google.com/macros/s/AKfycbxb9zC-44xQscnvtqYi2633iNejMUOwLKQpo41N3v9gbxxU2BeZFuATPjVIn2CdWHch/exec", {
+        method: "POST",
+        mode: "no-cors",  // prevents CORS error, but hides success/error response
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert("Your vote has been submitted.");
+      })
+      .catch((error) => {
+        console.error("Error submitting vote:", error);
+        alert("Something went wrong. Please try again.");
+      });
+    });
+  </script>  
