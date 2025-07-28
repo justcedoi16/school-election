@@ -73,8 +73,8 @@
       <label for="vp">Vice President</label>
       <select id="vp" name="vp" required>
         <option value="">Select Candidate</option>
-        <option value="Carla Dela Cruz">Carla Dela Cruz</option>
-        <option value="David Lim">David Lim</option>
+        <option value="Candidate A">Candidate A</option>
+        <option value="Candidate B">Candidate B</option>
       </select>
 
       <button type="submit">Submit Vote</button>
